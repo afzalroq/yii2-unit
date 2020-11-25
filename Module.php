@@ -1,6 +1,6 @@
 <?php
 
-namespace abdualiym\block;
+namespace afzalroq\unit;
 
 use abdualiym\language\Language;
 

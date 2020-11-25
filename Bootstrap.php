@@ -1,6 +1,6 @@
 <?php
 
-namespace abdualiym\block;
+namespace afzalroq\unit;
 
 use yii\base\BootstrapInterface;
 

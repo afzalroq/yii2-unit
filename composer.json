@@ -32,10 +32,10 @@
   },
   "autoload": {
     "psr-4": {
-      "abdualiym\\block\\": ""
+      "afzalroq\\unit\\": ""
     }
   },
   "extra": {
-    "bootstrap": "abdualiym\\block\\Bootstrap"
+    "bootstrap": "afzalroq\\unit\\Bootstrap"
   }
 }
