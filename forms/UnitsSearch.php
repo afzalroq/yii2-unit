@@ -1,13 +1,13 @@
 <?php
 
-namespace abdualiym\block\forms;
+namespace afzalroq\unit\forms;
 
-use abdualiym\block\entities\Categories;
-use abdualiym\block\entities\Blocks;
+use afzalroq\unit\entities\Categories;
+use afzalroq\unit\entities\Units;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 
-class BlocksSearch extends Blocks
+class UnitsSearch extends Units
 {
 
     public function rules()
@@ -32,7 +32,7 @@ class BlocksSearch extends Blocks
     public function search($params, $slug)
     {
         $category = Categories::findOne(['slug' => $slug]);
-        $query = Blocks::find()->where(['category_id' => $category->id]);
+        $query = Units::find()->where(['category_id' => $category->id]);
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,

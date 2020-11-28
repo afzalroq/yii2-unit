@@ -8,6 +8,7 @@ return [
     'Slug' => 'Алиас',
     'Description' => 'Описание',
     'Photo' => 'Картинка',
+    'Text' => 'Текст',
 
     'Categories' => 'Категории',
     'Category' => 'Категория',
@@ -21,8 +22,8 @@ return [
 
     'Photo' => 'Картинка',
     'View' => 'Просмотр',
-    'Blocks' => 'Блоки',
-    'Manage blocks' => 'Управление блоков',
+    'Units' => 'Блоки',
+    'Units for moderator' => 'Блоки для модератора',
 
     'Save' => 'Сохранить',
     'Create' => 'Добавить',
@@ -39,4 +40,13 @@ return [
     'Common image' => 'Общий РИСУНОК',
     'Translateable files' => 'Переводимые ФАЙЛЫ',
     'Common file' => 'Общий ФАЙЛ',
+    'Translateable inputs' => 'Переводимые ВХОДЫ',
+    'Common input' => 'Общий ВХОД',
+
+    'String validator' => 'Строковый валидатор',
+    'Email validator' => 'Электронное письмо валидатор',
+    'Integer validator' => 'Целое число валидатор',
+    'URL validator' => 'URL валидатор',
+
+    'Text cannot be blank.' => 'Текст не может быть пустым.',
 ];

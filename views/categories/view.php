@@ -1,6 +1,6 @@
 <?php
 
-use abdualiym\block\entities\Categories;
+use afzalroq\unit\entities\Categories;
 use yii\helpers\Html;
 use yii\widgets\DetailView;
 
@@ -38,7 +38,7 @@ $this->params['breadcrumbs'][] = $this->title;
                             'label' => Yii::t('block', 'View'),
                             'format' => 'raw',
                             'value' => function ($model) {
-                                return Html::a(Yii::t('block', 'Blocks'), ['blocks/index', 'slug' => $model->slug]);
+                                return Html::a(Yii::t('block', 'Units for moderator'), ['units', 'slug' => $model->slug]);
                             }
                         ]
                     ],
@@ -55,7 +55,7 @@ $this->params['breadcrumbs'][] = $this->title;
                             'label' => Yii::t('block', 'View'),
                             'format' => 'raw',
                             'value' => function ($model) {
-                                return Html::a(Yii::t('block', 'Manage blocks'), ['blocks', 'slug' => $model->slug]);
+                                return Html::a(Yii::t('block', 'Units'), ['units/index', 'slug' => $model->slug]);
                             }
                         ]
                     ],
@@ -64,9 +64,9 @@ $this->params['breadcrumbs'][] = $this->title;
         </div>
     </div>
 
-    <?= $this->render('_blocks_form', [
+    <?= $this->render('_units_form', [
         'model' => $model,
-        'blocks' => $blocks
+        'units' => $units
     ]) ?>
 
 </div>

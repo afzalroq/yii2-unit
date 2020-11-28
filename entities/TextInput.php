@@ -2,9 +2,6 @@
 
 namespace afzalroq\unit\entities;
 
-use afzalroq\unit\helpers\Type;
-use mihaildev\elfinder\ElFinder;
-use sadovojav\ckeditor\CKEditor;
 use Yii;
 use yii\base\Model;
 use yii\behaviors\TimestampBehavior;
@@ -14,14 +11,56 @@ use yii\behaviors\TimestampBehavior;
  * @property int $created_at
  * @property int $updated_at
  */
-class Text extends UnitActiveRecord
+class TextInput extends UnitActiveRecord
 {
+
+    const STRING = 1;
+    const EMAIL = 2;
+    const INTEGER = 3;
+    const URL = 4;
+
+    private static $_validator;
+
+    public static function addValidation($validatorName = self::STRING)
+    {
+        switch ($validatorName) {
+            case $validatorName == self::STRING:
+                self::$_validator = 'string';
+                break;
+            case $validatorName == self::EMAIL:
+                self::$_validator = 'email';
+                break;
+            case $validatorName == self::INTEGER:
+                self::$_validator = 'integer';
+                break;
+            case $validatorName == self::URL:
+                self::$_validator = 'url';
+                break;
+        }
+        Yii::$app->session->set('validator', self::$_validator);
+    }
+
+    public static function validatorName($key)
+    {
+        $list = self::validatorList();
+        return $list[$key];
+    }
+
+    public static function validatorList()
+    {
+        return [
+            self::STRING => \Yii::t('block', 'String validator'),
+            self::EMAIL => \Yii::t('block', 'Email validator'),
+            self::INTEGER => \Yii::t('block', 'Integer validator'),
+            self::URL => \Yii::t('block', 'Url validator')
+        ];
+    }
 
     public function rules()
     {
         return [
-            [['data_0', 'data_1', 'data_2', 'data_3', 'data_4'], 'string'],
-            [['data_0', 'data_1', 'data_2', 'data_3', 'data_4'], 'required', 'message' => Yii::t('block','Text cannot be blank.')],
+            [['data_0', 'data_1', 'data_2', 'data_3', 'data_4'], Yii::$app->session->get('validator')],
+            [['data_0', 'data_1', 'data_2', 'data_3', 'data_4'], 'required', 'message' => Yii::t('block', 'Text cannot be blank.')],
         ];
     }
 
@@ -68,21 +107,7 @@ class Text extends UnitActiveRecord
     public function getFormField($form, $key, $language)
     {
         $thisLanguage = $language ? '('.$language.')' : '';
-        switch ($this->type) {
-            case Type::STRINGS:
-            case Type::STRING_COMMON:
-                return $form->field($this, '['.$this->id.']data_' . $key)->textarea(['rows' => 16])->label($this->label . $thisLanguage);
-            case Type::TEXTS:
-            case Type::TEXT_COMMON:
-                return $form->field($this, '['.$this->id.']data_' . $key)->widget(CKEditor::class, [
-                    'editorOptions' => ElFinder::ckeditorOptions('elfinder', [
-                        'preset' => 'standard',
-                        'extraPlugins' => 'image2,widget,oembed,video',
-                        'language' => Yii::$app->language,
-                        'height' => 300,
-                    ]),
-                ])->label($this->label . $thisLanguage);
-        }
+        return $form->field($this, '[' . $this->id . ']data_' . $key)->textInput()->label($this->label . $thisLanguage);
     }
 
     public function load($data, $formName = null)

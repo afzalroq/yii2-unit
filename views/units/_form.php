@@ -1,12 +1,13 @@
 <?php
 
-use abdualiym\block\entities\Blocks;
-use abdualiym\block\helpers\Type;
+use afzalroq\unit\entities\TextInput;
+use afzalroq\unit\entities\Units;
+use afzalroq\unit\helpers\Type;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
-/* @var $model Blocks */
+/* @var $model Units */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
@@ -38,12 +39,45 @@ use yii\widgets\ActiveForm;
                 <?= $form->field($model, 'sort')->textInput(['value' => $model->getSortValue($category->id)]) ?>
             </div>
             <div class="col-sm-2">
-                <br>
-                <?= Html::submitButton(Yii::t('block', 'Save'), ['class' => 'btn btn-success btn-block']) ?>
+                <?= $form->field($model, 'inputValidator')->dropDownList(TextInput::validatorList()) ?>
             </div>
+        </div>
+        <div class="form-group">
+            <?= Html::submitButton(Yii::t('block', 'Save'), ['class' => 'btn btn-success']) ?>
         </div>
     </div>
 
     <?php ActiveForm::end(); ?>
 
 </div>
+
+<?php
+$inputCommon = Type::INPUT_COMMON;
+$inputs = Type::INPUTS;
+
+$newScript = <<< JS
+    var inputs = $inputs;
+    var inputCommon = $inputCommon;
+    
+    var selectTypes = $('#units-type');
+    var inputValidatorDiv = $('.field-units-inputvalidator');
+
+    showValidatorInput(selectTypes.val());
+    selectTypes.on('change', function () {
+        showValidatorInput(this.value);
+    });
+    
+    function showValidatorInput (type) {
+        if (type == inputs || type == inputCommon){
+            inputValidatorDiv.show();
+        } else {
+            inputValidatorDiv.hide();
+        }
+    };
+JS;
+
+$this->registerJs(
+    $newScript
+);
+
+?>

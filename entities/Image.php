@@ -1,6 +1,6 @@
 <?php
 
-namespace abdualiym\block\entities;
+namespace afzalroq\unit\entities;
 
 use kartik\file\FileInput;
 use Yii;
@@ -14,7 +14,7 @@ use yiidreamteam\upload\ImageUploadBehavior;
  * @property int $created_at
  * @property int $updated_at
  */
-class Image extends BlockActiveRecord
+class Image extends UnitActiveRecord
 {
 
     public static function getFileUrl($object): string
@@ -31,7 +31,8 @@ class Image extends BlockActiveRecord
     public function rules()
     {
         return [
-            [['data_0', 'data_1', 'data_2', 'data_3'], 'image'],
+            [['data_0', 'data_1', 'data_2', 'data_3' ,'data_4'], 'image'],
+            [['data_0', 'data_1', 'data_2', 'data_3' ,'data_4'], 'required', 'message' => Yii::t('block','Text cannot be blank.')],
         ];
     }
 
@@ -41,12 +42,14 @@ class Image extends BlockActiveRecord
         $language1 = Yii::$app->params['cms']['languages2'][1] ?? '';
         $language2 = Yii::$app->params['cms']['languages2'][2] ?? '';
         $language3 = Yii::$app->params['cms']['languages2'][3] ?? '';
+        $language4 = Yii::$app->params['cms']['languages2'][4] ?? '';
 
         return [
-            'data_0' => Yii::t('slider', 'Photo') . '(' . $language0 . ')',
-            'data_1' => Yii::t('slider', 'Photo') . '(' . $language1 . ')',
-            'data_2' => Yii::t('slider', 'Photo') . '(' . $language2 . ')',
-            'data_3' => Yii::t('slider', 'Photo') . '(' . $language3 . ')',
+            'data_0' => Yii::t('block', 'Photo') . '(' . $language0 . ')',
+            'data_1' => Yii::t('block', 'Photo') . '(' . $language1 . ')',
+            'data_2' => Yii::t('block', 'Photo') . '(' . $language2 . ')',
+            'data_3' => Yii::t('block', 'Photo') . '(' . $language3 . ')',
+            'data_4' => Yii::t('block', 'Photo') . '(' . $language4 . ')',
         ];
     }
 
@@ -57,22 +60,23 @@ class Image extends BlockActiveRecord
             $this->getBehaviorConfig('data_0'),
             $this->getBehaviorConfig('data_1'),
             $this->getBehaviorConfig('data_2'),
-            $this->getBehaviorConfig('data_3')
+            $this->getBehaviorConfig('data_3'),
+            $this->getBehaviorConfig('data_4')
         ];
     }
 
     private function getBehaviorConfig($attribute)
     {
-        $module = Yii::$app->getModule('block');
+        $module = Yii::$app->getModule('unit');
 
         return [
             'class' => ImageUploadBehavior::class,
             'attribute' => $attribute,
             'createThumbsOnRequest' => true,
-            'filePath' => $module->storageRoot . '/data/blocks/[[attribute_id]]/[[filename]].[[extension]]',
-            'fileUrl' => $module->storageHost . '/data/blocks/[[attribute_id]]/[[filename]].[[extension]]',
-            'thumbPath' => $module->storageRoot . '/cache/blocks/[[attribute_id]]/[[profile]]_[[filename]].[[extension]]',
-            'thumbUrl' => $module->storageHost . '/cache/blocks/[[attribute_id]]/[[profile]]_[[filename]].[[extension]]',
+            'filePath' => $module->storageRoot . '/data/units/[[attribute_id]]/[[filename]].[[extension]]',
+            'fileUrl' => $module->storageHost . '/data/units/[[attribute_id]]/[[filename]].[[extension]]',
+            'thumbPath' => $module->storageRoot . '/cache/units/[[attribute_id]]/[[profile]]_[[filename]].[[extension]]',
+            'thumbUrl' => $module->storageHost . '/cache/units/[[attribute_id]]/[[profile]]_[[filename]].[[extension]]',
             'thumbs' => array_merge($module->thumbs, [
                 'sm' => ['width' => 106, 'height' => 60],
                 'md' => ['width' => 212, 'height' => 120],
@@ -98,6 +102,7 @@ class Image extends BlockActiveRecord
 
     public function getFormField($form, $key, $language)
     {
+        $thisLanguage = $language ? '('.$language.')' : '';
         return $form->field($this, '[' . $this->id . ']data_' . $key)->widget(FileInput::class, [
             'options' => ['accept' => 'image/*'],
             'language' => Yii::$app->language,
@@ -107,7 +112,7 @@ class Image extends BlockActiveRecord
                 'showCaption' => false,
                 'showRemove' => false,
                 'showCancel' => false,
-                'browseClass' => 'btn btn-primary btn-block',
+                'browseClass' => 'btn btn-primary btn-unit',
                 'browseLabel' => Yii::t('block', 'Upload'),
                 'layoutTemplates' => [
                     'main1' => '<div class="kv-upload-progress hide"></div>{browse}{preview}',
@@ -116,7 +121,7 @@ class Image extends BlockActiveRecord
                     Html::img($this->getThumbFileUrl('data_' . $key, 'md'), ['class' => 'file-preview-image', 'alt' => '', 'title' => '']),
                 ],
             ],
-        ])->label($this->label . "($language)");
+        ])->label($this->label . $thisLanguage);
     }
 
 
@@ -126,6 +131,7 @@ class Image extends BlockActiveRecord
         $this->data_1 = UploadedFile::getInstanceByName(Html::getInputName($this, '[' . $this->id . ']data_1'));
         $this->data_2 = UploadedFile::getInstanceByName(Html::getInputName($this, '[' . $this->id . ']data_2'));
         $this->data_3 = UploadedFile::getInstanceByName(Html::getInputName($this, '[' . $this->id . ']data_3'));
+        $this->data_4 = UploadedFile::getInstanceByName(Html::getInputName($this, '[' . $this->id . ']data_4'));
         return parent::beforeValidate();
     }
 }

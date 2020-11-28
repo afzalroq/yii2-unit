@@ -1,6 +1,6 @@
 <?php
 
-use abdualiym\block\entities\Categories;
+use afzalroq\unit\entities\Categories;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 

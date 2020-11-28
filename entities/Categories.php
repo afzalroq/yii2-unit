@@ -1,8 +1,8 @@
 <?php
 
-namespace abdualiym\block\entities;
+namespace afzalroq\unit\entities;
 
-use abdualiym\block\validators\SlugValidator;
+use afzalroq\unit\validators\SlugValidator;
 use abdualiym\language\Language;
 use Yii;
 use yii\behaviors\TimestampBehavior;
@@ -19,7 +19,7 @@ class Categories extends \yii\db\ActiveRecord
 
     public static function tableName()
     {
-        return 'abdualiym_block_categories';
+        return 'afzalroq_unit_categories';
     }
 
     public function rules()

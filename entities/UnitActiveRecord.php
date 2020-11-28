@@ -1,6 +1,6 @@
 <?php
 
-namespace abdualiym\block\entities;
+namespace afzalroq\unit\entities;
 
 use yii\db\ActiveRecord;
 
@@ -9,11 +9,11 @@ use yii\db\ActiveRecord;
  * @property int $created_at
  * @property int $updated_at
  */
-abstract class BlockActiveRecord extends ActiveRecord
+abstract class UnitActiveRecord extends ActiveRecord
 {
     public static function tableName()
     {
-        return 'abdualiym_block_blocks';
+        return 'afzalroq_unit_units';
     }
 
     abstract public function getData($key);

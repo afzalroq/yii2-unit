@@ -1,23 +1,25 @@
 <?php
 
-use abdualiym\block\forms\BlocksSearch;
-use abdualiym\block\entities\Blocks;
+use afzalroq\unit\forms\UnitsSearch;
+use afzalroq\unit\entities\Units;
+use afzalroq\unit\entities\Categories;
 use yii\grid\GridView;
 use yii\helpers\Html;
-use abdualiym\block\helpers\Type;
+use afzalroq\unit\helpers\Type;
 
 /* @var $this yii\web\View */
-/* @var $searchModel BlocksSearch */
-/* @var $category \abdualiym\block\entities\Categories */
+/* @var $searchModel UnitsSearch */
+/* @var $category Categories */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
 $this->title = $category->title;
-$this->params['breadcrumbs'][] = ['label' => $category->title, 'url' => ['/block/categories/view', 'id' => $category->id]];
+$this->params['breadcrumbs'][] = ['label' => $category->title, 'url' => ['/unit/categories/view', 'id' => $category->id]];
 ?>
 <div class="articles-index">
 
     <p>
         <?= Html::a(Yii::t('block', 'Create'), ['create', 'slug' => $category->slug], ['class' => 'btn btn-success']) ?>
+        <?= Html::a(Yii::t('block', 'Categories'), ['categories/index'], ['class' => 'btn btn-primary']) ?>
     </p>
 
     <?= GridView::widget([
@@ -27,8 +29,8 @@ $this->params['breadcrumbs'][] = ['label' => $category->title, 'url' => ['/block
             'sort',
             [
                 'attribute' => 'label',
-                'value' => function (Blocks $model) use ($category) {
-                    return Html::a($model->label, ['update', 'id' => $model->id, 'slug' => $category->slug]);
+                'value' => function (Units $model) use ($category) {
+                    return Html::a($model->label, ['view', 'id' => $model->id, 'slug' => $category->slug]);
                 },
                 'format' => 'raw'
             ],

@@ -1,5 +1,5 @@
 <?php
-use abdualiym\block\entities\Categories;
+use afzalroq\unit\entities\Categories;
 
 /* @var $this yii\web\View */
 /* @var $model Categories */

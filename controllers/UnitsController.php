@@ -1,16 +1,18 @@
 <?php
 
-namespace abdualiym\block\controllers;
+namespace afzalroq\unit\controllers;
 
-use abdualiym\block\entities\Categories;
-use abdualiym\block\entities\Blocks;
-use abdualiym\block\forms\BlocksSearch;
+use afzalroq\unit\entities\Categories;
+use afzalroq\unit\entities\TextInput;
+use afzalroq\unit\entities\Units;
+use afzalroq\unit\forms\UnitsSearch;
+use afzalroq\unit\helpers\Type;
 use Yii;
 use yii\filters\VerbFilter;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 
-class BlocksController extends Controller
+class UnitsController extends Controller
 {
     public function behaviors()
     {
@@ -25,12 +27,12 @@ class BlocksController extends Controller
     }
 
     /**
-     * Lists all Blocks models.
+     * Lists all Units models.
      * @return mixed
      */
     public function actionIndex($slug)
     {
-        $searchModel = new BlocksSearch();
+        $searchModel = new UnitsSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams, $slug);
 
         return $this->render('index', [
@@ -41,7 +43,7 @@ class BlocksController extends Controller
     }
 
     /**
-     * Displays a single Blocks model.
+     * Displays a single Units model.
      * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
@@ -55,15 +57,15 @@ class BlocksController extends Controller
     }
 
     /**
-     * Finds the Blocks model based on its primary key value.
+     * Finds the Units model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Blocks the loaded model
+     * @return Units the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Blocks::findOne($id)) !== null) {
+        if (($model = Units::findOne($id)) !== null) {
             return $model;
         }
 
@@ -71,16 +73,20 @@ class BlocksController extends Controller
     }
 
     /**
-     * Creates a new Blocks model.
+     * Creates a new Units model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate($slug)
     {
-        $model = new Blocks();
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id, 'slug' => $slug]);
+        $model = new Units();
+        if ($model->load(Yii::$app->request->post())) {
+            if ($model->type == Type::INPUTS || $model->type == Type::INPUT_COMMON) {
+                TextInput::addValidation($model->inputValidator);
+            }
+            if ($model->save()) {
+                return $this->redirect(['view', 'id' => $model->id, 'slug' => $slug]);
+            }
         }
 
         return $this->render('create', [
@@ -90,7 +96,7 @@ class BlocksController extends Controller
     }
 
     /**
-     * Updates an existing Blocks model.
+     * Updates an existing Units model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -111,7 +117,7 @@ class BlocksController extends Controller
     }
 
     /**
-     * Deletes an existing Blocks model.
+     * Deletes an existing Units model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed

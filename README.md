@@ -24,8 +24,8 @@ php yii migrate/up --migrationPath=@vendor/afzalroq/yii2-unit/migrations
 > Begin id param value from 0.
 ```php
 'modules' => [
-    'block' => [ // don`t change module key
-        'class' => '@abdualiym\block\Module',
+    'unit' => [ // don`t change module key
+        'class' => '@afzalroq\unit\Module',
         'storageRoot' => $params['staticPath'],
         'storageHost' => $params['staticHostInfo'],
         'thumbs' => [ // 'sm' and 'md' keys are reserved
@@ -48,8 +48,8 @@ php yii migrate/up --migrationPath=@vendor/afzalroq/yii2-unit/migrations
 
 - In admin panel add belove links for manage categories and blocks:
 ```php
-/block/categories/index
-/block/block/index?slug=your_category_slug_name
+/unit/categories/index
+/unit/units/index?slug=your_category_slug_name
 ```
 
 > For using BlockController actions you must manual specify their category slug in route.
@@ -83,14 +83,14 @@ Extension registers next language arrays to Yii::$app->params[] for use in views
 
 > get all blocks by category slug
 ```
-abdualiym\block\entities\Blocks::getBySlug($slug)
+afzalroq\unit\entities\Units::getBySlug($slug)
 
 ```
 
 > get each block data for current app language:
 ```
-$blocks = Blocks::getBySlug($slug);
-foreach ($blocks as $block) {
+$units = Units::getBySlug($slug);
+foreach ($units as $unit) {
     echo ($blockObject->getModelByType())->get();
 }
 

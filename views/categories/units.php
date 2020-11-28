@@ -1,20 +1,20 @@
 <?php
 
-use abdualiym\block\entities\Categories;
-use abdualiym\block\entities\Blocks;
+use afzalroq\unit\entities\Categories;
+use afzalroq\unit\entities\Units;
 
 /* @var $this yii\web\View */
 /* @var $model Categories */
-/* @var $blocks Blocks */
+/* @var $units Units */
 
 $this->title = $model->title;
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="article-categories-create">
 
-    <?= $this->render('_blocks_form', [
+    <?= $this->render('_units_form', [
         'model' => $model,
-        'blocks' => $blocks,
+        'units' => $units,
     ]) ?>
 
 </div>

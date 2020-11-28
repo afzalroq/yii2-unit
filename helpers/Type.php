@@ -1,6 +1,6 @@
 <?php
 
-namespace abdualiym\block\helpers;
+namespace afzalroq\unit\helpers;
 
 class Type
 {
@@ -13,6 +13,8 @@ class Type
     const FILE_COMMON = 16;
     const TEXTS = 21;
     const TEXT_COMMON = 22;
+    const INPUTS = 25;
+    const INPUT_COMMON = 26;
 
 
     public static function config($type): array
@@ -47,7 +49,9 @@ class Type
             self::IMAGES => \Yii::t('block', 'Translateable images'),
             self::IMAGE_COMMON => \Yii::t('block', 'Common image'),
             self::FILES => \Yii::t('block', 'Translateable files'),
-            self::FILE_COMMON => \Yii::t('block', 'Common file')
+            self::FILE_COMMON => \Yii::t('block', 'Common file'),
+            self::INPUTS => \Yii::t('block', 'Translateable inputs'),
+            self::INPUT_COMMON => \Yii::t('block', 'Common input')
         ];
     }
 }

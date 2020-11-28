@@ -1,9 +1,9 @@
 <?php
 
-namespace abdualiym\block\entities;
+namespace afzalroq\unit\entities;
 
-use abdualiym\block\helpers\Type;
-use abdualiym\block\validators\SlugValidator;
+use afzalroq\unit\helpers\Type;
+use afzalroq\unit\validators\SlugValidator;
 use Yii;
 use yii\behaviors\TimestampBehavior;
 use yii\helpers\ArrayHelper;
@@ -16,17 +16,20 @@ use yii\helpers\ArrayHelper;
  * @property string $label
  * @property string $slug
  * @property string $type
+ * @property string $inputValidator
  * @property int $created_at
  * @property int $updated_at
  *
  * @property Categories $category
  */
-class Blocks extends \yii\db\ActiveRecord
+class Units extends \yii\db\ActiveRecord
 {
+
+    public $inputValidator;
 
     public static function getBySlug($slug)
     {
-        return Blocks::find()
+        return Units::find()
             ->where(['category_id' => (Categories::findOne(['slug' => $slug]))->id])
             ->orderBy('sort')
             ->all();
@@ -34,7 +37,7 @@ class Blocks extends \yii\db\ActiveRecord
 
     public static function tableName()
     {
-        return 'abdualiym_block_blocks';
+        return 'afzalroq_unit_units';
     }
 
     public function rules()
@@ -57,6 +60,8 @@ class Blocks extends \yii\db\ActiveRecord
 
             ['size', 'required'],
             ['size', 'integer', 'min' => 1, 'max' => 12],
+
+            ['inputValidator', 'integer'],
 
             ['type', 'required'],
             [['type'], 'in', 'range' => array_keys(Type::list())],
@@ -117,6 +122,9 @@ class Blocks extends \yii\db\ActiveRecord
             case Type::TEXTS:
             case Type::TEXT_COMMON:
                 return Text::findOne($this->id);
+            case Type::INPUTS:
+            case Type::INPUT_COMMON:
+                return TextInput::findOne($this->id);
         }
     }
 }

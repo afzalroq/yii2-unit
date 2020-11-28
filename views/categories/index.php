@@ -1,7 +1,7 @@
 <?php
 
-use abdualiym\block\entities\Categories;
-use abdualiym\block\forms\CategoriesSearch;
+use afzalroq\unit\entities\Categories;
+use afzalroq\unit\forms\CategoriesSearch;
 use yii\grid\GridView;
 use yii\helpers\Html;
 
@@ -34,7 +34,7 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'attribute' => 'id',
                 'value' => function (Categories $model) {
-                    return Html::a(Yii::t('block','Manage blocks'), ['blocks/index', 'slug' => $model->slug]);
+                    return Html::a(Yii::t('block','Units'), ['units/index', 'slug' => $model->slug]);
                 },
                 'label' => Yii::t('block', 'View'),
                 'format' => 'raw'

@@ -1,10 +1,10 @@
 <?php
 
-use abdualiym\block\entities\Categories;
-use abdualiym\block\entities\Blocks;
+use afzalroq\unit\entities\Categories;
+use afzalroq\unit\entities\Units;
 
 /* @var $this yii\web\View */
-/* @var $model Blocks */
+/* @var $model Units */
 /* @var $category Categories */
 
 $this->title = Yii::t('block', 'Create');
