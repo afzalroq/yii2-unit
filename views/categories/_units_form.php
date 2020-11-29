@@ -1,6 +1,6 @@
 <?php
 
-use afzalroq\unit\entities\Units;
+use afzalroq\unit\entities\Unit;
 use afzalroq\unit\helpers\Type;
 use yii\helpers\Html;
 use yii\web\View;
@@ -8,7 +8,7 @@ use yii\widgets\ActiveForm;
 use afzalroq\unit\entities\Categories;
 
 /* @var $this View */
-/* @var $units Units */
+/* @var $units Unit */
 /* @var $model Categories */
 /* @var $form ActiveForm */
 ?>

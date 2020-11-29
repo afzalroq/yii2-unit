@@ -38,7 +38,7 @@ $this->params['breadcrumbs'][] = $this->title;
                             'label' => Yii::t('block', 'View'),
                             'format' => 'raw',
                             'value' => function ($model) {
-                                return Html::a(Yii::t('block', 'Units for moderator'), ['units', 'slug' => $model->slug]);
+                                return Html::a(Yii::t('block', 'Unit for moderator'), ['unit', 'slug' => $model->slug]);
                             }
                         ]
                     ],
@@ -55,7 +55,7 @@ $this->params['breadcrumbs'][] = $this->title;
                             'label' => Yii::t('block', 'View'),
                             'format' => 'raw',
                             'value' => function ($model) {
-                                return Html::a(Yii::t('block', 'Units'), ['units/index', 'slug' => $model->slug]);
+                                return Html::a(Yii::t('block', 'Unit'), ['unit/index', 'slug' => $model->slug]);
                             }
                         ]
                     ],

@@ -4,15 +4,15 @@ namespace afzalroq\unit\controllers;
 
 use afzalroq\unit\entities\Categories;
 use afzalroq\unit\entities\TextInput;
-use afzalroq\unit\entities\Units;
-use afzalroq\unit\forms\UnitsSearch;
+use afzalroq\unit\entities\Unit;
+use afzalroq\unit\forms\UnitSearch;
 use afzalroq\unit\helpers\Type;
 use Yii;
 use yii\filters\VerbFilter;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 
-class UnitsController extends Controller
+class UnitController extends Controller
 {
     public function behaviors()
     {
@@ -27,12 +27,12 @@ class UnitsController extends Controller
     }
 
     /**
-     * Lists all Units models.
+     * Lists all Unit models.
      * @return mixed
      */
     public function actionIndex($slug)
     {
-        $searchModel = new UnitsSearch();
+        $searchModel = new UnitSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams, $slug);
 
         return $this->render('index', [
@@ -43,7 +43,7 @@ class UnitsController extends Controller
     }
 
     /**
-     * Displays a single Units model.
+     * Displays a single Unit model.
      * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
@@ -57,15 +57,15 @@ class UnitsController extends Controller
     }
 
     /**
-     * Finds the Units model based on its primary key value.
+     * Finds the Unit model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Units the loaded model
+     * @return Unit the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Units::findOne($id)) !== null) {
+        if (($model = Unit::findOne($id)) !== null) {
             return $model;
         }
 
@@ -73,13 +73,13 @@ class UnitsController extends Controller
     }
 
     /**
-     * Creates a new Units model.
+     * Creates a new Unit model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate($slug)
     {
-        $model = new Units();
+        $model = new Unit();
         if ($model->load(Yii::$app->request->post())) {
             if ($model->type == Type::INPUTS || $model->type == Type::INPUT_COMMON) {
                 TextInput::addValidation($model->inputValidator);
@@ -96,7 +96,7 @@ class UnitsController extends Controller
     }
 
     /**
-     * Updates an existing Units model.
+     * Updates an existing Unit model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -117,7 +117,7 @@ class UnitsController extends Controller
     }
 
     /**
-     * Deletes an existing Units model.
+     * Deletes an existing Unit model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed

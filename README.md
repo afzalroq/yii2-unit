@@ -83,13 +83,13 @@ Extension registers next language arrays to Yii::$app->params[] for use in views
 
 > get all blocks by category slug
 ```
-afzalroq\unit\entities\Units::getBySlug($slug)
+afzalroq\unit\entities\Unit::getBySlug($slug)
 
 ```
 
 > get each block data for current app language:
 ```
-$units = Units::getBySlug($slug);
+$units = Unit::getBySlug($slug);
 foreach ($units as $unit) {
     echo ($blockObject->getModelByType())->get();
 }

@@ -34,7 +34,7 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'attribute' => 'id',
                 'value' => function (Categories $model) {
-                    return Html::a(Yii::t('block','Units'), ['units/index', 'slug' => $model->slug]);
+                    return Html::a(Yii::t('block','Unit'), ['unit/index', 'slug' => $model->slug]);
                 },
                 'label' => Yii::t('block', 'View'),
                 'format' => 'raw'

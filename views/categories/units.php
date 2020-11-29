@@ -1,11 +1,11 @@
 <?php
 
 use afzalroq\unit\entities\Categories;
-use afzalroq\unit\entities\Units;
+use afzalroq\unit\entities\Unit;
 
 /* @var $this yii\web\View */
 /* @var $model Categories */
-/* @var $units Units */
+/* @var $units Unit */
 
 $this->title = $model->title;
 $this->params['breadcrumbs'][] = $this->title;

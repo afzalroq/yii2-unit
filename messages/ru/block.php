@@ -22,8 +22,8 @@ return [
 
     'Photo' => 'Картинка',
     'View' => 'Просмотр',
-    'Units' => 'Блоки',
-    'Units for moderator' => 'Блоки для модератора',
+    'Unit' => 'Блоки',
+    'Unit for moderator' => 'Блоки для модератора',
 
     'Save' => 'Сохранить',
     'Create' => 'Добавить',

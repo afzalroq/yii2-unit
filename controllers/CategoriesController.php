@@ -3,7 +3,7 @@
 namespace afzalroq\unit\controllers;
 
 use afzalroq\unit\entities\TextInput;
-use afzalroq\unit\entities\Units;
+use afzalroq\unit\entities\Unit;
 use afzalroq\unit\entities\Categories;
 use afzalroq\unit\forms\CategoriesSearch;
 use Yii;
@@ -50,7 +50,7 @@ class CategoriesController extends Controller
     public function actionView($id)
     {
         $model = $this->findModel($id);
-        $units = Units::getBySlug($model->slug);
+        $units = Unit::getBySlug($model->slug);
         foreach ($units as $unit) {
             $modelByType = $unit->getModelByType();
             $modelByType->load(Yii::$app->request->post());
@@ -79,11 +79,11 @@ class CategoriesController extends Controller
         throw new NotFoundHttpException(Yii::t('block', 'The requested page does not exist.'));
     }
 
-    public function actionUnits($slug)
+    public function actionUnit($slug)
     {
         $model = Categories::findOne(['slug' => $slug]);
 
-        $units = Units::getBySlug($slug);
+        $units = Unit::getBySlug($slug);
         foreach ($units as $unit) {
             $modelByType = $unit->getModelByType();
             $modelByType->load(Yii::$app->request->post());

@@ -1,14 +1,14 @@
 <?php
 
-use afzalroq\unit\forms\UnitsSearch;
-use afzalroq\unit\entities\Units;
+use afzalroq\unit\forms\UnitSearch;
+use afzalroq\unit\entities\Unit;
 use afzalroq\unit\entities\Categories;
 use yii\grid\GridView;
 use yii\helpers\Html;
 use afzalroq\unit\helpers\Type;
 
 /* @var $this yii\web\View */
-/* @var $searchModel UnitsSearch */
+/* @var $searchModel UnitSearch */
 /* @var $category Categories */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
@@ -29,7 +29,7 @@ $this->params['breadcrumbs'][] = ['label' => $category->title, 'url' => ['/unit/
             'sort',
             [
                 'attribute' => 'label',
-                'value' => function (Units $model) use ($category) {
+                'value' => function (Unit $model) use ($category) {
                     return Html::a($model->label, ['view', 'id' => $model->id, 'slug' => $category->slug]);
                 },
                 'format' => 'raw'

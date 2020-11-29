@@ -1,13 +1,13 @@
 <?php
 
 use afzalroq\unit\entities\TextInput;
-use afzalroq\unit\entities\Units;
+use afzalroq\unit\entities\Unit;
 use afzalroq\unit\helpers\Type;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
-/* @var $model Units */
+/* @var $model Unit */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
@@ -59,8 +59,8 @@ $newScript = <<< JS
     var inputs = $inputs;
     var inputCommon = $inputCommon;
     
-    var selectTypes = $('#units-type');
-    var inputValidatorDiv = $('.field-units-inputvalidator');
+    var selectTypes = $('#unit-type');
+    var inputValidatorDiv = $('.field-unit-inputvalidator');
 
     showValidatorInput(selectTypes.val());
     selectTypes.on('change', function () {

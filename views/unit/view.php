@@ -1,16 +1,16 @@
 <?php
 
-use afzalroq\unit\entities\Units;
+use afzalroq\unit\entities\Unit;
 use afzalroq\unit\helpers\Type;
 use yii\helpers\Html;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
-/* @var $model Units */
+/* @var $model Unit */
 /* @var $category \afzalroq\unit\entities\Categories */
 
 $this->title = $model->label;
-$this->params['breadcrumbs'][] = ['label' => Yii::t('block','Units'), 'url' => ['index', 'slug' => $category->slug]];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('block','Unit'), 'url' => ['index', 'slug' => $category->slug]];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="articles-view">

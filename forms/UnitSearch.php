@@ -3,11 +3,11 @@
 namespace afzalroq\unit\forms;
 
 use afzalroq\unit\entities\Categories;
-use afzalroq\unit\entities\Units;
+use afzalroq\unit\entities\Unit;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 
-class UnitsSearch extends Units
+class UnitSearch extends Unit
 {
 
     public function rules()
@@ -32,7 +32,7 @@ class UnitsSearch extends Units
     public function search($params, $slug)
     {
         $category = Categories::findOne(['slug' => $slug]);
-        $query = Units::find()->where(['category_id' => $category->id]);
+        $query = Unit::find()->where(['category_id' => $category->id]);
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,

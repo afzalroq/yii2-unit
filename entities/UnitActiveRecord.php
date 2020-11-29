@@ -18,5 +18,7 @@ abstract class UnitActiveRecord extends ActiveRecord
 
     abstract public function getData($key);
 
+    abstract public function get();
+
     abstract public function getFormField($form, $key, $language);
 }

@@ -6,6 +6,7 @@ use afzalroq\unit\helpers\Type;
 use afzalroq\unit\validators\SlugValidator;
 use Yii;
 use yii\behaviors\TimestampBehavior;
+use yii\caching\TagDependency;
 use yii\helpers\ArrayHelper;
 
 /**
@@ -22,17 +23,49 @@ use yii\helpers\ArrayHelper;
  *
  * @property Categories $category
  */
-class Units extends \yii\db\ActiveRecord
+class Unit extends \yii\db\ActiveRecord
 {
 
     public $inputValidator;
 
+    public static function get($slug)
+    {
+        Yii::$app->fileCache->getOrSet('unit' . Yii::$app->language, function () use ($slug) {
+            return self::getModelByType()->get();
+        }, 0, $dependency);
+
+    }
+
+    public function getModelByType()
+    {
+        switch ($this->type) {
+            case Type::FILES:
+            case Type::FILE_COMMON:
+                return File::findOne($this->id);
+            case Type::IMAGES:
+            case Type::IMAGE_COMMON:
+                return Image::findOne($this->id);
+            case Type::STRINGS:
+            case Type::STRING_COMMON:
+            case Type::TEXTS:
+            case Type::TEXT_COMMON:
+                return Text::findOne($this->id);
+            case Type::INPUTS:
+            case Type::INPUT_COMMON:
+                return TextInput::findOne($this->id);
+        }
+    }
+
     public static function getBySlug($slug)
     {
-        return Units::find()
-            ->where(['category_id' => (Categories::findOne(['slug' => $slug]))->id])
-            ->orderBy('sort')
-            ->all();
+        $dependency = new TagDependency(['tags' => ['unit']]);
+        Yii::$app->fileCache->getOrSet('unit' . Yii::$app->language, function () use ($slug) {
+            return Unit::find()
+                ->where(['category_id' => (Categories::findOne(['slug' => $slug]))->id])
+                ->orderBy('sort')
+                ->all();
+        }, 0, $dependency);
+
     }
 
     public static function tableName()
@@ -106,25 +139,5 @@ class Units extends \yii\db\ActiveRecord
         return [
             TimestampBehavior::class,
         ];
-    }
-
-    public function getModelByType()
-    {
-        switch ($this->type) {
-            case Type::FILES:
-            case Type::FILE_COMMON:
-                return File::findOne($this->id);
-            case Type::IMAGES:
-            case Type::IMAGE_COMMON:
-                return Image::findOne($this->id);
-            case Type::STRINGS:
-            case Type::STRING_COMMON:
-            case Type::TEXTS:
-            case Type::TEXT_COMMON:
-                return Text::findOne($this->id);
-            case Type::INPUTS:
-            case Type::INPUT_COMMON:
-                return TextInput::findOne($this->id);
-        }
     }
 }
