@@ -30,7 +30,7 @@ class Unit extends \yii\db\ActiveRecord
 
     public static function get($slug)
     {
-        Yii::$app->fileCache->getOrSet('unit' . Yii::$app->language, function () use ($slug) {
+        return Yii::$app->cache->getOrSet('unit' . Yii::$app->language, function () use ($slug) {
             return self::getModelByType()->get();
         }, 0, $dependency);
 
@@ -59,7 +59,7 @@ class Unit extends \yii\db\ActiveRecord
     public static function getBySlug($slug)
     {
         $dependency = new TagDependency(['tags' => ['unit']]);
-        Yii::$app->fileCache->getOrSet('unit' . Yii::$app->language, function () use ($slug) {
+        return Yii::$app->cache->getOrSet('unit' . Yii::$app->language, function () use ($slug) {
             return Unit::find()
                 ->where(['category_id' => (Categories::findOne(['slug' => $slug]))->id])
                 ->orderBy('sort')
