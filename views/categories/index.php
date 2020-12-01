@@ -24,19 +24,19 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            [
-                'attribute' => 'title',
-                'format' => 'raw',
-                'value' => function ($model) {
-                    return Html::a($model->title, ['view', 'id' => $model->id]);
-                }
-            ],
+                        [
+                            'attribute' => 'title',
+                            'format' => 'raw',
+                            'value' => function ($model) {
+                                return Html::a($model->title, ['view', 'id' => $model->id]);
+                            }
+                        ],
             [
                 'attribute' => 'id',
                 'value' => function (Categories $model) {
-                    return Html::a(Yii::t('block', 'Blocks'), ['unit/index', 'slug' => $model->slug]);
+                    return Html::a(Yii::t('block','Unit'), ['unit/index', 'slug' => $model->slug]);
                 },
-                'label' => Yii::t('block', 'Manage blocks'),
+                'label' => Yii::t('block', 'View'),
                 'format' => 'raw'
             ],
             'created_at:datetime',

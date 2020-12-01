@@ -23,6 +23,7 @@ class m200305_121443_create_unit_units_table extends Migration
             'label' => $this->string()->notNull(),
             'size' => $this->integer()->notNull(),
             'type' => $this->integer()->notNull(),
+            'inputValidator' => $this->integer()->defaultValue(1),
             'data_0' => $this->text(),
             'data_1' => $this->text(),
             'data_2' => $this->text(),

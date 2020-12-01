@@ -32,7 +32,6 @@ class Image extends UnitActiveRecord
     {
         return [
             [['data_0', 'data_1', 'data_2', 'data_3' ,'data_4'], 'image'],
-            [['data_0', 'data_1', 'data_2', 'data_3' ,'data_4'], 'required', 'message' => Yii::t('block','Text cannot be blank.')],
         ];
     }
 

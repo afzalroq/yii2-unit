@@ -3,12 +3,11 @@
 namespace afzalroq\unit\controllers;
 
 use afzalroq\unit\entities\Categories;
-use afzalroq\unit\entities\TextInput;
 use afzalroq\unit\entities\Unit;
 use afzalroq\unit\forms\UnitSearch;
-use afzalroq\unit\helpers\Type;
 use Yii;
 use yii\filters\VerbFilter;
+use yii\helpers\VarDumper;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 
@@ -80,13 +79,9 @@ class UnitController extends Controller
     public function actionCreate($slug)
     {
         $model = new Unit();
-        if ($model->load(Yii::$app->request->post())) {
-            if ($model->type == Type::INPUTS || $model->type == Type::INPUT_COMMON) {
-                TextInput::addValidation($model->inputValidator);
-            }
-            if ($model->save()) {
-                return $this->redirect(['view', 'id' => $model->id, 'slug' => $slug]);
-            }
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            VarDumper::dump($model,12,true);die;
+            return $this->redirect(['view', 'id' => $model->id, 'slug' => $slug]);
         }
 
         return $this->render('create', [

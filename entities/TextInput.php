@@ -5,6 +5,7 @@ namespace afzalroq\unit\entities;
 use Yii;
 use yii\base\Model;
 use yii\behaviors\TimestampBehavior;
+use yii\helpers\VarDumper;
 
 /**
  * @property int $id
@@ -19,25 +20,22 @@ class TextInput extends UnitActiveRecord
     const INTEGER = 3;
     const URL = 4;
 
-    private static $_validator;
-
-    public static function addValidation($validatorName = self::STRING)
+    public static function getValidator($validatorKey = self::STRING)
     {
-        switch ($validatorName) {
-            case $validatorName == self::STRING:
-                self::$_validator = 'string';
+        switch ($validatorKey) {
+            case $validatorKey == self::STRING:
+                return [0 => 'string', 1 => Yii::t('block', 'The value "Email" is not a valid email address.')];
                 break;
-            case $validatorName == self::EMAIL:
-                self::$_validator = 'email';
+            case $validatorKey == self::EMAIL:
+                return [0 => 'email', 1 => Yii::t('block', 'The value "Email" is not a valid email address.')];
                 break;
-            case $validatorName == self::INTEGER:
-                self::$_validator = 'integer';
+            case $validatorKey == self::INTEGER:
+                return [0 => 'integer', 1 => Yii::t('block', 'The value "Email" is not a valid email address.')];
                 break;
-            case $validatorName == self::URL:
-                self::$_validator = 'url';
+            case $validatorKey == self::URL:
+                return [0 => 'url', 1 => Yii::t('block', 'The value "Email" is not a valid email address.')];
                 break;
         }
-        Yii::$app->session->set('validator', self::$_validator);
     }
 
     public static function validatorName($key)
@@ -49,18 +47,18 @@ class TextInput extends UnitActiveRecord
     public static function validatorList()
     {
         return [
-            self::STRING => \Yii::t('block', 'String validator'),
-            self::EMAIL => \Yii::t('block', 'Email validator'),
-            self::INTEGER => \Yii::t('block', 'Integer validator'),
-            self::URL => \Yii::t('block', 'Url validator')
+            self::STRING => \Yii::t('block', 'String'),
+            self::EMAIL => \Yii::t('block', 'Email'),
+            self::INTEGER => \Yii::t('block', 'Integer'),
+            self::URL => \Yii::t('block', 'Url')
         ];
     }
 
     public function rules()
     {
         return [
-            [['data_0', 'data_1', 'data_2', 'data_3', 'data_4'], Yii::$app->session->get('validator')],
-            [['data_0', 'data_1', 'data_2', 'data_3', 'data_4'], 'required', 'message' => Yii::t('block', 'Text cannot be blank.')],
+//            [['data_0', 'data_1', 'data_2', 'data_3', 'data_4'], TextInput::getValidator(Unit::findOne(['slug' => $this->data_0])->inputValidator)[0]],
+            [['data_0', 'data_1', 'data_2', 'data_3', 'data_4'], 'string'],
         ];
     }
 
@@ -106,7 +104,7 @@ class TextInput extends UnitActiveRecord
 
     public function getFormField($form, $key, $language)
     {
-        $thisLanguage = $language ? '('.$language.')' : '';
+        $thisLanguage = $language ? '(' . $language . ')' : '';
         return $form->field($this, '[' . $this->id . ']data_' . $key)->textInput()->label($this->label . $thisLanguage);
     }
 
@@ -115,7 +113,7 @@ class TextInput extends UnitActiveRecord
         $success = false;
 
         foreach ($data as $postFormName => $formDataArray) {
-            if ($this->formName() == 'Text') {
+            if ($postFormName == 'TextInput') {
                 foreach ($data[$this->formName()] as $id => $formData) {
                     if ($this->id == $id) {
                         $success = Model::load($formDataArray, $id);

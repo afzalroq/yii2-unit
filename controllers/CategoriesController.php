@@ -2,12 +2,15 @@
 
 namespace afzalroq\unit\controllers;
 
+use afzalroq\unit\entities\Categories;
 use afzalroq\unit\entities\TextInput;
 use afzalroq\unit\entities\Unit;
-use afzalroq\unit\entities\Categories;
 use afzalroq\unit\forms\CategoriesSearch;
+use afzalroq\unit\helpers\Type;
 use Yii;
+use yii\base\DynamicModel;
 use yii\filters\VerbFilter;
+use yii\helpers\VarDumper;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 
@@ -51,7 +54,20 @@ class CategoriesController extends Controller
     {
         $model = $this->findModel($id);
         $units = Unit::getBySlug($model->slug);
+        /** @var $unit Unit */
         foreach ($units as $unit) {
+            $data_0 = 'data_0';
+            $data_1 = 'data_1';
+            $data_2 = 'data_2';
+            $data_3 = 'data_3';
+            $data_4 = 'data_4';
+            $modelDynamic = new DynamicModel(compact('data_0', 'data_1', 'data_2', 'data_3', 'data_4'));
+            $modelDynamic->addRule(['data_0', 'data_1', 'data_2', 'data_3', 'data_4'], TextInput::getValidator($unit->inputValidator)[0])
+                ->validate();
+            if ($modelDynamic->hasErrors()) {
+                // validation fails
+            }
+
             $modelByType = $unit->getModelByType();
             $modelByType->load(Yii::$app->request->post());
             $modelByType->save();
