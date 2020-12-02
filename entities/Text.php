@@ -8,6 +8,7 @@ use sadovojav\ckeditor\CKEditor;
 use Yii;
 use yii\base\Model;
 use yii\behaviors\TimestampBehavior;
+use yii\helpers\VarDumper;
 
 /**
  * @property int $id
@@ -21,7 +22,6 @@ class Text extends UnitActiveRecord
     {
         return [
             [['data_0', 'data_1', 'data_2', 'data_3', 'data_4'], 'string'],
-            [['data_0', 'data_1', 'data_2', 'data_3', 'data_4'], 'required', 'message' => Yii::t('block','Text cannot be blank.')],
         ];
     }
 
@@ -90,7 +90,7 @@ class Text extends UnitActiveRecord
         $success = false;
 
         foreach ($data as $postFormName => $formDataArray) {
-            if ($this->formName() == 'Text') {
+            if ($postFormName == 'Text') {
                 foreach ($data[$this->formName()] as $id => $formData) {
                     if ($this->id == $id) {
                         $success = Model::load($formDataArray, $id);

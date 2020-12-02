@@ -61,14 +61,16 @@ $newScript = <<< JS
     
     var selectTypes = $('#unit-type');
     var inputValidatorDiv = $('.field-unit-inputvalidator');
-
+    console.log(selectTypes.val());
     showValidatorInput(selectTypes.val());
     selectTypes.on('change', function () {
+        console.log(this.value);
         showValidatorInput(this.value);
     });
     
     function showValidatorInput (type) {
         if (type == inputs || type == inputCommon){
+            // console.log(inputValidatorDiv);
             inputValidatorDiv.show();
         } else {
             inputValidatorDiv.hide();

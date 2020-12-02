@@ -40,13 +40,17 @@ return [
     'Common image' => 'Общий РИСУНОК',
     'Translateable files' => 'Переводимые ФАЙЛЫ',
     'Common file' => 'Общий ФАЙЛ',
-    'Translateable inputs' => 'Переводимые ВХОДЫ',
-    'Common input' => 'Общий ВХОД',
+    'Translateable inputs' => 'Переводимые ИНПУТЫ',
+    'Common input' => 'Общий ИНПУТ',
 
-    'String validator' => 'Строковый валидатор',
-    'Email validator' => 'Электронное письмо валидатор',
-    'Integer validator' => 'Целое число валидатор',
-    'URL validator' => 'URL валидатор',
+    'String' => 'Cтрока',
+    'Email' => 'Электронная почта',
+    'Integer' => 'Целое число',
+    'URL' => 'URL',
 
     'Text cannot be blank.' => 'Текст не может быть пустым.',
+    'This value is not a string.' => 'Это значение не является строкой.',
+    'The value "Email" is not a valid email address.' => 'Значение «Email» не является правильным email адресом.',
+    'This value is ot a integer.' => 'Это значение не целое.',
+    'This value is not a URL.' => 'Это значение не является URL-адресом.',
 ];

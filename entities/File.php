@@ -21,7 +21,6 @@ class File extends UnitActiveRecord
     {
         return [
             [['data_0', 'data_1', 'data_2', 'data_3', 'data_4'], 'file'],
-            [['data_0', 'data_1', 'data_2', 'data_3', 'data_4'], 'required']
         ];
     }
 

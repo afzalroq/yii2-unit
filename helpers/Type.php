@@ -42,6 +42,8 @@ class Type
     public static function list()
     {
         return [
+            self::INPUTS => \Yii::t('block', 'Translateable inputs'),
+            self::INPUT_COMMON => \Yii::t('block', 'Common input'),
             self::STRINGS => \Yii::t('block', 'Translateable strings'),
             self::STRING_COMMON => \Yii::t('block', 'Common string'),
             self::TEXTS => \Yii::t('block', 'Translateable texts'),
@@ -49,9 +51,7 @@ class Type
             self::IMAGES => \Yii::t('block', 'Translateable images'),
             self::IMAGE_COMMON => \Yii::t('block', 'Common image'),
             self::FILES => \Yii::t('block', 'Translateable files'),
-            self::FILE_COMMON => \Yii::t('block', 'Common file'),
-            self::INPUTS => \Yii::t('block', 'Translateable inputs'),
-            self::INPUT_COMMON => \Yii::t('block', 'Common input')
+            self::FILE_COMMON => \Yii::t('block', 'Common file')
         ];
     }
 }
