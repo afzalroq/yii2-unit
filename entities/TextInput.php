@@ -24,16 +24,16 @@ class TextInput extends UnitActiveRecord
     {
         switch ($validatorKey) {
             case $validatorKey == self::STRING:
-                return [0 => 'string', 1 => Yii::t('block', 'This value is not a string.')];
+                return ['validator' => 'string', 'massege' => Yii::t('block', 'This value is not a string.')];
                 break;
             case $validatorKey == self::EMAIL:
-                return [0 => 'email', 1 => Yii::t('block', 'The value "Email" is not a valid email address.')];
+                return ['validator' => 'email', 'massege' => Yii::t('block', 'The value "Email" is not a valid email address.')];
                 break;
             case $validatorKey == self::INTEGER:
-                return [0 => 'integer', 1 => Yii::t('block', 'This value is not a integer.')];
+                return ['validator' => 'integer', 'massege' => Yii::t('block', 'This value is not a integer.')];
                 break;
             case $validatorKey == self::URL:
-                return [0 => 'url', 1 => Yii::t('block', 'This value is not a URL.')];
+                return ['validator' => 'url', 'massege' => Yii::t('block', 'This value is not a URL.')];
                 break;
         }
     }
@@ -58,8 +58,8 @@ class TextInput extends UnitActiveRecord
     {
         return [
             [['data_0', 'data_1', 'data_2', 'data_3', 'data_4'],
-                TextInput::getValidator(Unit::findOne(['data_0' => $this->data_0])->inputValidator)[0],
-                'message' => TextInput::getValidator(Unit::findOne(['data_0' => $this->data_0])->inputValidator)[1]],
+                self::getValidator(Unit::findOne(['data_0' => $this->data_0])->inputValidator)['validator'],
+                'message' => self::getValidator(Unit::findOne(['data_0' => $this->data_0])->inputValidator)['massege']],
         ];
     }
 
